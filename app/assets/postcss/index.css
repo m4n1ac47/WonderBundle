@@ -17,9 +17,10 @@ body{
 }
 
 .box{
-	width: 100px;
+	width: 500px;
 	background-color: $color;
 	@mixin get 'bear.jpeg';
+	margin: 30px auto * auto;
 }
 
 .title{
