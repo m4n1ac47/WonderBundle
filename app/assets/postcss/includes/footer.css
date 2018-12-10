@@ -1,0 +1,12 @@
+.footer{
+	display: none;
+	size: 32px;
+	margin: * auto;
+
+	&__item{
+		display: block;
+	}
+	.item{
+		display: none;
+	}
+}

@@ -1,0 +1,30 @@
+{
+  "name": "WonderBundle",
+  "version": "1.0.0",
+  "description": "WonderBundle: based on PostCSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.4.2",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.7",
+    "gulp": "^3.9.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "postcss-assets": "^5.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-mixins": "^6.2.0",
+    "postcss-nested": "^4.1.0",
+    "postcss-preset-env": "^6.4.0",
+    "postcss-short": "^5.0.0",
+    "postcss-simple-vars": "^5.0.1",
+    "postcss-strip-units": "^2.0.1",
+    "sort-css-media-queries": "^1.4.1"
+  },
+  "dependencies": {}
+}
