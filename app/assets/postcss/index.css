@@ -1,17 +1,6 @@
 @import "includes/wonder.css";
 @import "includes/vars.css";
 
-@mixin font Roboto, RobotoThin, 100;
-@mixin font Roboto, RobotoLight, 300;
-@mixin font Roboto, RobotoRegular;
-@mixin font Roboto, RobotoMedium, 500;
-@mixin font Roboto, RobotoBold, 700;
-@mixin font Roboto, RobotoBlack, 900;
-
-@mixin res;
-
-@import "includes/footer.css";
-
 body{
 	font-family: $font;
 }
@@ -34,3 +23,4 @@ body{
 	font-weight: 700;
 	font-weight: 900;
 }
+
