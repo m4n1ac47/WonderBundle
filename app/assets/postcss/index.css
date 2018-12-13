@@ -8,7 +8,7 @@ body{
 
 .box{
 	width: 500px;
-	background-color: $color;
+	background-image: resolve('bear.jpeg');
 	@mixin get 'bear.jpeg';
 	margin: 30px auto * auto;
 }
@@ -24,4 +24,3 @@ body{
 	font-weight: 700;
 	font-weight: 900;
 }
-

@@ -1,5 +1,5 @@
-let del               = require('del'),
-    gulp              = require('gulp'),
+let gulp              = require('gulp'),
+    del               = require('del'),
     gutil             = require('gulp-util'),
     rename            = require('gulp-rename'),
     notify            = require("gulp-notify"),
@@ -41,23 +41,7 @@ let plugins = [
         cssnano()
     ];
 
-gulp.task('css', function () {
-    return gulp.src('./app/assets/postcss/*.css')
-        .pipe(gutil.env.type === 'production' ? gutil.noop() : sourcemaps.init())
-        .pipe(postcss(plugins).on("error", notify.onError()))
-        .pipe(rename('styles.min.css'))
-        .pipe(gutil.env.type === 'production' ? gutil.noop() : sourcemaps.write('.'))
-        .pipe(gulp.dest('./app/assets/css/'))
-        .pipe(browserSync.stream())
-});
-
-gulp.task('default', ['watch']); // gulp --type production
-
-gulp.task('clean', function() {
-    return del.sync('dist');
-});
-
-gulp.task('browser-sync', function() {
+function browser() {
     browserSync({
         server: {
             baseDir: 'app'
@@ -68,10 +52,39 @@ gulp.task('browser-sync', function() {
         // online: false, // Work Offline Without Internet Connection
         // tunnel: true, tunnel: "projectname", // Demonstration page: http://projectname.localtunnel.me
     })
-});
+}
 
-gulp.task('watch', ['css', 'browser-sync'], function() {
-    gulp.watch('app/assets/postcss/**/*.css', ['css']);
+function styles() {
+    return gulp.src('./app/assets/postcss/*.css')
+        .pipe(gutil.env.type === 'production' ? gutil.noop() : sourcemaps.init())
+        .pipe(postcss(plugins).on("error", notify.onError()))
+        .pipe(rename('styles.min.css'))
+        .pipe(gutil.env.type === 'production' ? gutil.noop() : sourcemaps.write('.'))
+        .pipe(gulp.dest('./app/assets/css/'))
+        .pipe(browserSync.stream())
+};
+
+function serve() {
+    gulp.watch('app/assets/postcss/**/*.css', styles);
     gulp.watch('app/**/*.php', browserSync.reload);
     gulp.watch('app/*.html', browserSync.reload);
-});
+}
+
+function clean(end) {
+    del.sync('dist');
+    end();
+};
+
+function build(end) {
+    let css = gulp.src('app/assets/css/**/*.css')
+    .pipe(gulp.dest('dist/assets/css'))
+    end();
+};
+
+gulp.task('styles', styles);
+gulp.task('browser', browser);
+gulp.task('serve', serve);
+gulp.task('watch', gulp.parallel('styles', 'browser', 'serve'));
+gulp.task('clean', clean);
+gulp.task('build', build);
+gulp.task('default', gulp.series('watch')); // gulp --type production
